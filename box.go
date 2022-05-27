@@ -88,7 +88,7 @@ func (b *box) RemoveAllCircles() error {
 	exist := false
 	var resultShapes []Shape
 	for _, v := range b.shapes {
-		_, ok := v.(Triangle)
+		_, ok := v.(Rectangle)
 		if ok {
 			exist = true
 		} else {
