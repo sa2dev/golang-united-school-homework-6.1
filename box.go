@@ -58,7 +58,7 @@ func (b *box) ReplaceByIndex(i int, shape Shape) (Shape, error) {
 	if err != nil {
 		return nil, err
 	}
-	b.shapes[i] = shape
+	b.shapes = append(b.shapes[:i], b.shapes[i+1:]...)
 	return s, nil
 }
 
@@ -91,19 +91,21 @@ func (b *box) SumArea() float64 {
 // whether circles are not exist in the list, then returns an error
 func (b *box) RemoveAllCircles() error {
 	exist := false
+	var resultShapes []Shape
 	for i, v := range b.shapes {
 		if v == nil {
 			continue
 		}
 		_, ok := v.(Circle)
 		if ok {
-			b.shapes[i] = nil
 			exist = true
+		} else {
+			resultShapes = append(resultShapes, b.shapes[i])
 		}
 	}
 	if !exist {
 		return errors.New("circles not found in box")
 	}
-
+	b.shapes = resultShapes
 	return nil
 }
