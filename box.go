@@ -13,7 +13,7 @@ type box struct {
 // NewBox creates new instance of box
 func NewBox(shapesCapacity int) *box {
 	return &box{
-		make([]Shape, shapesCapacity),
+		make([]Shape, 0, shapesCapacity),
 		shapesCapacity,
 	}
 }
