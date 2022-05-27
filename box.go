@@ -90,7 +90,7 @@ func (b *box) RemoveAllCircles() error {
 	for _, v := range b.shapes {
 		_, ok := v.(Rectangle)
 		if ok {
-			exist = true
+			//exist = true
 		} else {
 			resultShapes = append(resultShapes, v)
 		}
