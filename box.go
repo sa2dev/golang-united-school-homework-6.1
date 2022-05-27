@@ -47,7 +47,7 @@ func (b *box) ExtractByIndex(i int) (Shape, error) {
 	if err != nil {
 		return nil, err
 	}
-	b.shapes[i] = nil
+	b.shapes = append(b.shapes[:i], b.shapes[i+1:]...)
 	return s, nil
 }
 
@@ -58,7 +58,8 @@ func (b *box) ReplaceByIndex(i int, shape Shape) (Shape, error) {
 	if err != nil {
 		return nil, err
 	}
-	b.shapes = append(b.shapes[:i], b.shapes[i+1:]...)
+	b.shapes[i] = shape
+
 	return s, nil
 }
 
