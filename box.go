@@ -67,9 +67,6 @@ func (b *box) ReplaceByIndex(i int, shape Shape) (Shape, error) {
 func (b *box) SumPerimeter() float64 {
 	var perimeter float64
 	for _, v := range b.shapes {
-		if v == nil {
-			continue
-		}
 		perimeter += v.CalcPerimeter()
 	}
 	return perimeter
@@ -79,9 +76,6 @@ func (b *box) SumPerimeter() float64 {
 func (b *box) SumArea() float64 {
 	var area float64
 	for _, v := range b.shapes {
-		if v == nil {
-			continue
-		}
 		area += v.CalcArea()
 	}
 	return area
@@ -93,15 +87,12 @@ func (b *box) SumArea() float64 {
 func (b *box) RemoveAllCircles() error {
 	exist := false
 	var resultShapes []Shape
-	for i, v := range b.shapes {
-		if v == nil {
-			continue
-		}
-		_, ok := v.(Circle)
+	for _, v := range b.shapes {
+		_, ok := v.(Triangle)
 		if ok {
 			exist = true
 		} else {
-			resultShapes = append(resultShapes, b.shapes[i])
+			resultShapes = append(resultShapes, v)
 		}
 	}
 	if !exist {
